@@ -193,9 +193,13 @@ details.project p { margin: 0.6rem 0 0; animation: fade-in 0.3s ease; }
 }
 
 .project-link:hover {
-  background: var(--gold);
-  color: var(--blue);
-  box-shadow: none;
+  background: rgba(250, 189, 15, 0.14);
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+  box-shadow: 0 0 12px rgba(250, 189, 15, 0.35);
+  transform: translateY(-2px);
 }
 
 /* add text effect */
