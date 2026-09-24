@@ -50,7 +50,7 @@ body::before {
   to { background-position: -250px 0; }
 }
 
-/* ===== 星云 ===== */
+/* ===== xingyun ===== */
 body::after {
   content: "";
   position: fixed;
@@ -178,4 +178,107 @@ details.project p { margin: 0.6rem 0 0; animation: fade-in 0.3s ease; }
 /* ===== Respect the "reduce motion" system setting (accessibility) ===== */
 @media (prefers-reduced-motion: reduce) {
   body::before, body::after, .sparkle, .shooting-star, details.project p { animation: none; }
+}
+
+/* visit bottom */
+.project-link {
+  display: inline-block;
+  margin-top: 0.2rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+.project-link:hover {
+  background: var(--gold);
+  color: var(--blue);
+  box-shadow: none;
+}
+
+/* add text effect */
+/* Headings: slow golden shimmer */
+h1,
+h2,
+.project summary,
+.project-link {
+  background: linear-gradient(
+    90deg,
+    var(--gold),
+    #fff3a3,
+    #ffffff,
+    #fff3a3,
+    var(--gold)
+  );
+  background-size: 300% 100%;
+  background-position: 0% center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-flow 12s linear infinite;
+}
+
+/* Main title moves more slowly */
+h1 {
+  animation-duration: 18s;
+}
+
+/* Descriptions: colorful left-to-right scrolling */
+.about p,
+.project p {
+  background: linear-gradient(
+    90deg,
+    #9bcac8,
+    #91b9cf,
+    #a8c9bb,
+    #9bcac8
+);
+  background-size: 400% 100%;
+  background-position: 0% center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow-flow 10s linear infinite;
+}
+
+/* Keep the arrow gold */
+.project-link span {
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
+}
+
+@keyframes gold-flow {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 300% center;
+  }
+}
+
+@keyframes rainbow-flow {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: 400% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1,
+  h2,
+  .project summary,
+  .project-link,
+  .about p,
+  .project p {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: var(--gold);
+  }
 }
