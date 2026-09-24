@@ -1,0 +1,181 @@
+:root {
+  --red:#b90e31; --gold:#fabd0f; --blue:#002452; --sky:#000814;
+}
+body { font-family: system-ui, sans-serif; margin:0; min-height: 100vh; background: radial-gradient(ellipse at bottom, var(--blue), var(--sky)); background-attachment: fixed; color:#fff; }
+header { text-align: center; padding: 3rem 2rem 1rem; }
+main { background: rgba(20, 22, 55, 0.55); color: #e6e9f5; border: 1px solid rgba(255, 255, 255, 0.12);  backdrop-filter: blur(12px); max-width: 900px; margin: 2rem auto; border-radius: 20px; padding: 1.5rem; }
+a {
+  display: inline-block;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6a4de0, #1a6fb0);
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(106, 77, 224, 0.5);
+}
+/* === personalize below by changing colors or spacing === */
+/* example: make headings gold and a bit larger */
+h2 { color: var(--gold); font-size: 1.6rem; }
+/* example: make your photo round */
+img { border-radius: 50%; border: 3px solid var(--gold); box-shadow: 0 0 25px rgba(250, 189, 15, 0.5); }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: 
+    radial-gradient(3px 3px at 20px 30px, #fff 50%, transparent),
+    radial-gradient(2px 2px at 80px 120px, #fff 50%, transparent),
+    radial-gradient(3px 3px at 150px 50px, var(--gold) 50%, transparent),
+    radial-gradient(2px 2px at 210px 90px, #fff 50%, transparent),
+    radial-gradient(3px 3px at 50px 200px, #fff 50%, transparent),
+    radial-gradient(2px 2px at 170px 180px, #fff 50%, transparent),
+    radial-gradient(3px 3px at 230px 230px, var(--gold) 50%, transparent);
+  background-size: 250px 250px;
+  animation: twinkle 3s ease-in-out infinite alternate, drift 30s linear infinite;
+
+}
+@keyframes twinkle {
+  from{opacity: 0.4;}
+  to{opacity: 1;}
+}
+
+@keyframes drift {
+  from { background-position: 0 0; }
+  to { background-position: -250px 0; }
+}
+
+/* ===== 星云 ===== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse 50% 35% at 25% 30%, rgba(140, 90, 220, 0.35), transparent),
+    radial-gradient(ellipse 45% 30% at 75% 65%, rgba(70, 130, 230, 0.3), transparent),
+    radial-gradient(ellipse 35% 25% at 65% 20%, rgba(220, 110, 200, 0.2), transparent);
+  animation: nebula 20s ease-in-out infinite alternate;
+}
+@keyframes nebula {
+  from { transform: scale(1); }
+  to { transform: scale(1.2) translate(-3%, 2%); }
+}
+
+/* ===== About: photo on the left, text on the right (stacks on small screens) ===== */
+.about {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.about img { flex-shrink: 0; }
+.about div { flex: 1; min-width: 220px; }
+.about h2 { margin-top: 0; }
+
+/* ===== Small screens (phones): keep a little space around the card ===== */
+@media (max-width: 600px) {
+  main { margin: 1.5rem 0.75rem; padding: 1.25rem; }
+}
+
+/* ===== Projects: collapsible cards (<details> / <summary>) ===== */
+details.project {
+  margin: 0.75rem 0;
+  padding: 0.8rem 1.1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s, border-color 0.2s;
+}
+details.project[open] {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(250, 189, 15, 0.4);
+}
+details.project summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+}
+details.project summary::-webkit-details-marker { display: none; } /* hide Safari's default arrow */
+details.project summary::after {
+  content: "\25B8"; /* ▸ arrow */
+  font-size: 1.2em;
+  color: var(--gold);
+  transition: transform 0.2s;
+}
+details.project[open] summary::after { transform: rotate(90deg); }
+details.project summary:hover { color: var(--gold); }
+details.project summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 6px; }
+details.project p { margin: 0.6rem 0 0; animation: fade-in 0.3s ease; }
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Easter egg: sparkles and shooting stars ===== */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+/* a bright star with a cross-shaped flare */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 2px #fff, 0 0 16px 6px rgba(170, 190, 255, 0.5);
+  animation: sparkle 4s ease-in-out infinite;
+}
+.sparkle::before,
+.sparkle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.sparkle::before { width: 44px; height: 1px; background: linear-gradient(90deg, transparent, #fff, transparent); }
+.sparkle::after { width: 1px; height: 44px; background: linear-gradient(180deg, transparent, #fff, transparent); }
+.s1 { top: 10%; left: 82%; }
+.s2 { top: 8%; left: 14%; animation-delay: 1.5s; }
+.s3 { top: 80%; left: 94%; animation-delay: 3s; }
+@keyframes sparkle {
+  0%, 100% { transform: scale(0.5) rotate(0deg); opacity: 0.5; }
+  50% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+/* a shooting star: a thin line with a bright head that flies down-left, then waits */
+.shooting-star {
+  position: absolute;
+  width: 140px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #fff, transparent);
+  opacity: 0;
+  animation: shoot 7s linear infinite;
+}
+.m1 { top: 2%; left: 90%; animation-delay: 2s; }
+.m2 { top: 4%; left: 38%; animation-delay: 5.5s; animation-duration: 9s; }
+@keyframes shoot {
+  0% { transform: rotate(-20deg) translateX(0); opacity: 0; }
+  3% { opacity: 1; }
+  12% { opacity: 1; }
+  16% { transform: rotate(-20deg) translateX(-700px); opacity: 0; }
+  100% { transform: rotate(-20deg) translateX(-700px); opacity: 0; }
+}
+
+/* ===== Respect the "reduce motion" system setting (accessibility) ===== */
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after, .sparkle, .shooting-star, details.project p { animation: none; }
+}
